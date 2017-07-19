@@ -38,12 +38,14 @@ $db = new PDO('mysql:host=localhost;dbname=music','kiwi','banane');
             albumMember($data['name'], $db);
             echo '<br>';
         } 
+        
+
 } catch (PDOException $exception) {
     echo $exception->getMessage();
 }
 
 function albumMember($name, $db) {
-    $sql = ('SELECT member.name FROM album, member, album_member WHERE album.name =\''.$name.'\' AND album_member.member_id = member.id AND album_member.album_id = album.id; '); 
+    $sql = 'SELECT member.name FROM album, member, album_member WHERE album.name =\''.$name.'\' AND album_member.member_id = member.id AND album_member.album_id = album.id; '; 
         $req = $db->query($sql); 
         $i=0;
         while($data = $req->fetch()){
@@ -53,6 +55,6 @@ function albumMember($name, $db) {
             echo '<b>'.$data['name'].'</b>';
             $i++;
         }
-}
-        echo '.';
+    }
+    echo '.';
 }
