@@ -15,12 +15,12 @@ $db = new PDO('mysql:host=localhost;dbname=music','kiwi','banane');
 
         echo '<br>Members :<br>';
 
-        $sql = 'SELECT member.name,member.role,member.birth,group.name as groupname  FROM member, `group` WHERE group.id = member.group_id'; 
+        $sql = 'SELECT member.id,member.name,member.role,member.birth,group.name as groupname  FROM member, `group` WHERE group.id = member.group_id'; 
 
         $req = $db->query($sql); 
         while($data = $req->fetch()) 
         { 
-            echo '<b>'.$data['name'].'</b>('.$data['role'].')'; 
+            echo '<b><a href="album.php?id='.$data['id'].'">'.$data['name'].'</a></b>('.$data['role'].')'; 
             echo ' <i>Naissance : '.$data['birth'].'</i> - '; 
             echo 'Appartient au groupe : <b>'.$data['groupname'].'</b><br>';
         } 
@@ -38,7 +38,6 @@ $db = new PDO('mysql:host=localhost;dbname=music','kiwi','banane');
             albumMember($data['name'], $db);
             echo '<br>';
         } 
-        
 
 } catch (PDOException $exception) {
     echo $exception->getMessage();
